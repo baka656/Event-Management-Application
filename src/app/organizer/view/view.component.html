@@ -1,0 +1,72 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{event}} View Marks</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+<ion-content > 
+  <ion-row>
+    <ion-col size="4">
+      <ion-input type="number" #search id="search" placeholder="receipt"></ion-input>
+    </ion-col>
+    <ion-col size="4">
+      <ion-button (click)="search1(search.value)" size=small>search<ion-icon name="search-outline" sloat="end"></ion-icon></ion-button>
+    </ion-col>
+    <ion-col size="4">
+      <ion-button (click)="clear()" size=small>clear</ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-list>
+    <ion-item *ngFor="let i of users">
+      <div *ngIf="round==1; else bakaittop">
+        <ion-item *ngIf="i.r1marks!=-1" text-wrap>
+          <ion-avatar slot="start" style="width: 20%;">
+            <p>{{ i.receipt }}</p>
+          </ion-avatar>
+          <ion-label style="font-size: medium;width: 100%;">
+              <ion-row>
+                <p>name : {{i.name}} </p>
+              </ion-row>
+              <ion-row>
+                <p>college : {{i.college}}</p>
+              </ion-row>
+              <ion-row> 
+                <p>contact : {{i.phone}} </p> 
+              </ion-row>
+              <ion-row>
+                <p>r1 score: {{i.r1marks}}</p>
+              </ion-row>
+          </ion-label>
+        </ion-item>
+      </div>
+      <ng-template #bakaittop>
+        <ion-item *ngIf="round==2 && i.r2marks!=-1">
+          <ion-avatar slot="start" style="width: 20%;">
+            <p>{{ i.receipt }}</p>
+          </ion-avatar>
+          <ion-label style="font-size: medium;">
+              <ion-row>
+                <p>name : {{i.name}} </p>
+              </ion-row>
+              <ion-row>
+                <p>college : {{i.college}}</p>
+              </ion-row>
+              <ion-row>
+                <p>contact :  {{i.phone}} </p> 
+              </ion-row>
+              <ion-row>
+                <p>r1 score: {{i.r2marks}}</p>
+              </ion-row>
+              <ion-row>
+                <p>r2 score: {{i.r1marks}}</p>
+              </ion-row>
+          </ion-label>
+        </ion-item>
+      </ng-template>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,56 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ecficio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h1 align=center> {{ selectedEvent.eventname }}</h1>
+  <ion-row>
+    <ion-col size="4">
+      <h4> Venue: </h4>
+    </ion-col>
+    <ion-col size="8">
+       <h4>Room no-{{selectedEvent.venue}} </h4>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="4">
+      <h4>Description: </h4>
+    </ion-col>
+    <ion-col size="8">
+       <p *ngFor="let f of selectedEvent.description">{{f}}</p>
+       
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="4">
+      <h4>Contacts: </h4>
+    </ion-col>
+    <ion-col size="8">
+       <p *ngFor="let f of selectedEvent.contactDetails">{{f}} </p>
+       
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="4">
+      <h4>Prize: </h4>
+    </ion-col>
+    <ion-col size="8">
+       <p *ngFor="let f of selectedEvent.prize; let i=index"> {{i+1 }}st {{" "}}Prize: {{f}} {{" /-"}} </p>
+       
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="3"><h4> Status : </h4></ion-col>
+    <ion-col size="7">
+       <h5 style="float:left">{{ ap }} </h5> <h5 style="float:right">  {{ tp }}  </h5>
+             <ion-progress-bar [value]="ap/tp" type="determinate" style="height:10px; border-radius:2rem;"></ion-progress-bar>
+    </ion-col>
+    <ion-col size="2"></ion-col>
+  </ion-row>
+
+</ion-content>

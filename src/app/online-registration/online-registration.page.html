@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Online Registration</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content> 
+  
+  <form [formGroup]="registrationForm" (ngSubmit)="createCode()">
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Name</ion-label>
+        <ion-input formControlName="name" type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }"></ion-input>
+        <ion-item *ngIf="submitted && f.name.errors" class="invalid-feedback">
+          <p *ngIf="f.name.errors.required">Name is required</p>
+        </ion-item>
+      </ion-item>
+      <ion-item >
+        <ion-label position="stacked">College</ion-label>
+        <ion-input type="text" formControlName="college" class="form-control" type="text" [ngClass]="{ 'is-invalid': submitted && f.college.errors }"></ion-input>
+        <ion-item *ngIf="submitted && f.college.errors" class="invalid-feedback">
+          <p *ngIf="f.college.errors.required">College is required</p>
+        </ion-item>
+      </ion-item> 
+      <ion-item >
+        <ion-label position="stacked">Phone</ion-label>
+        <ion-input formControlName="phone" type="number" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }"></ion-input>
+        <ion-item *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+          <p *ngIf="f.phone.errors.required">Phone is required</p>
+          <p *ngIf="f.phone.errors.minLength">phone number should have 10digits</p>
+          <p *ngIf="f.phone.errors.maxLength">phone number should have 10digits</p>
+        </ion-item>
+      </ion-item> 
+      <ion-item >
+        <ion-label position="stacked">Roll no</ion-label>
+        <ion-input formControlName="rollno" type="text" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.rollno.errors }"></ion-input>
+        <ion-item *ngIf="submitted && f.rollno.errors" class="invalid-feedback">
+          <p *ngIf="f.rollno.errors.required">Roll No is required</p>
+        </ion-item>       
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Email</ion-label>
+        <ion-input type="text" formControlName="email" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.email.errors }"></ion-input>
+        <ion-item *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <p *ngIf="f.email.errors.required">Email Id is required</p>
+            <p *ngIf="f.email.errors.pattern">Please provide a valid email-id</p>
+        </ion-item>
+      </ion-item>    
+      <ion-item>
+        <ion-text style="text-align: center;">Amount to be paid is: Rs.310.00</ion-text>
+      </ion-item> 
+      <ion-item>
+        <button type=submit size="small" class="btn btn-primary waves-effect waves-dark">Proceed<ion-icon slot="end" name="create"></ion-icon></button>
+      </ion-item>
+      </ion-list>   
+  </form>
+  
+</ion-content>

@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Events</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-xs size="5">
+        <ion-card button="true" *ngFor="let item of eventsData" routerDirection="forward" (click)="goTo(item)">
+          <img [src]="item.imagepath" >
+          <ion-card-header>
+            <ion-card-subtitle><h6 align=center>{{item.eventname}}</h6></ion-card-subtitle>
+            <ion-card-title></ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

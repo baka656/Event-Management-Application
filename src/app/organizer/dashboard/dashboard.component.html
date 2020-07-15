@@ -1,0 +1,54 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>{{event}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col size="4">
+      <ion-input type="number" #search id="search" placeholder="receipt no"></ion-input>
+    </ion-col>
+    <ion-col size="4">
+      <ion-button size=small expand=full (click)="getr1(search.value)">Round1</ion-button>
+    </ion-col>
+    <ion-col size="4">
+      <ion-button size=small expand=full (click)="getr2(search.value)">Round2</ion-button>
+    </ion-col>
+  </ion-row>
+  <br><br>
+
+  <div>
+    <ion-button expand="block" type="submit" (click)="Scancoder1()">Scancode Round 1<ion-icon name="scan-outline" slot="end"></ion-icon></ion-button>
+    <ion-card *ngIf="qr1"> 
+      <ion-card-content>
+          {{status+" "}}<br>
+          receipt : {{data.receipt}} <br>
+          name : {{data.name}}<br>
+          college : {{data.college}}  <br>       
+          contact : {{data.phone}} <br>
+          rollno : {{data.rollno}} <br>
+          email : {{data.email}} 
+      </ion-card-content>
+    </ion-card>
+    <ion-button expand="block"  (click)="UpdateMarksr1()" > Update Marks r1<ion-icon name="arrow-up-circle-outline" slot="end"></ion-icon></ion-button> 
+    <ion-button expand="block"  (click)="ViewMarksr1()" >View Marks r1</ion-button> <br><br><br><br><br>
+    
+    <ion-button expand="block" type="submit" (click)="Scancoder2()">Scancode Round 2<ion-icon name="scan-outline" slot="end"></ion-icon></ion-button>
+      <ion-card *ngIf="qr2"> 
+        <ion-card-content>
+            {{status+" "}}<br>
+            receipt : {{data.receipt}} <br>
+            name : {{data.name}}<br>
+            college : {{data.college}}  <br>       
+            contact : {{data.phone}} <br>
+            rollno : {{data.rollno}} <br>
+            email : {{data.email}} 
+        </ion-card-content>
+      </ion-card>
+    <ion-button expand="block"  (click)="UpdateMarksr2()"> Update Marks r2<ion-icon name="arrow-up-circle-outline" slot="end"></ion-icon></ion-button> 
+    <ion-button expand="block"  (click)="ViewMarksr2()">View Marks r2</ion-button> <br><br><br><br>
+    
+    <ion-button expand="block"  (click)="logout()" >logout<ion-icon name="log-out-outline" slot="end"></ion-icon></ion-button> 
+</div>
+</ion-content>

@@ -1,0 +1,51 @@
+ionic start Ecficio --capacitor
+cd Ecficio
+npx cap init
+ionic build
+npx cap add ios
+npx cap add android
+
+
+//installations//
+npm i -g cordova
+npm i com.razorpay.cordova
+cordova plugin add https://github.com/razorpay/razorpay-cordova.git --save
+npx cap sync
+npm install ngx-qrcode2 --save
+npm install @techiediaries/ngx-qrcode --save
+npx cap sync
+ionic cordova plugin add phonegap-plugin-barcodescanner --save
+npm install @ionic-native/barcode-scanner --save
+npx cap sync
+
+//pages and components//
+ionic g service ittop
+ionic g page events
+ionic g component events/selected-event
+ionic g page online-registration
+ionic g component online-registration/qrgenerate
+ionic g page offline-registration
+ionic g page organizer
+ionic g component organizer/dashboard
+
+
+
+//to deploy android//
+ionic build 
+npx cap copy
+npx cap open android
+
+
+//aws putty//
+sudo yum update
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+nvm install 12.18.0
+sudo amazon-linux-extras install nginx1
+path=>etc/nginx
+sudo chmod ugo=+rxw conf.d
+cd conf.d
+sudo cat > default.conf
+sudo vi default.conf
+
+pscp -i C:\Users\abbhinav\Downloads\ittop.ppk -r C:\Users\abbhinav\Ecficio\www\* ubuntu@ec2-3-15-192-245.us-east-2.compute.amazonaws.com:/opt/front-end
+
