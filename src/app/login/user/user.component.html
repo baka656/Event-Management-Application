@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="boo">Participant Login</ion-title>
+    <ion-title *ngIf="!boo">Organizer Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="boo">
+    <ion-item>
+      <ion-label position="floating">Receipt no:</ion-label>
+      <ion-input type="text" #r required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Mobile no:</ion-label>
+      <ion-input type="number" #phne required></ion-input>
+    </ion-item>
+    <ion-button size="small" expand="full" (click)="loginp(r.value,phne.value)">Signin</ion-button>
+  </div>
+  <div *ngIf="!boo">
+    <ion-item>
+      <ion-label position="floating">Password:</ion-label>
+      <ion-input type="text" #pass required></ion-input>
+    </ion-item>
+    <ion-button size="small" expand="full" (click)="loginr(pass.value)">Login</ion-button>
+  </div>
+</ion-content>

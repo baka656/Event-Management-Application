@@ -9,6 +9,9 @@ const { Storage } = Plugins;
 })
 export class IttopService {
 
+  //mlink:string="http://localhost:8080";
+  mlink:string="https://ecficiom.herokuapp.com";
+  //mlink="";
   constructor(private http:HttpClient) { }
 
 
@@ -33,86 +36,47 @@ export class IttopService {
       await Storage.clear();
   }
 
-  
-  /*getUsers(){
-    return this.http.post('http://localhost:8080/user/getUsers',{});
-  }
-  getUser(obj){
-    return this.http.post('http://localhost:8080/user/getUser',obj);
-  }
-  addUser(obj){
-    return this.http.post('http://localhost:8080/user/addUser',obj);
-  }
-  scanUser1(obj){
-    return this.http.post('http://localhost:8080/user/scanUser1',obj);
-  }
-  scanUser2(obj){
-    return this.http.post('http://localhost:8080/user/scanUser2',obj);
-  }
-  updateMarks1(obj){
-    return this.http.post('http://localhost:8080/user/updateMarks1',obj);
-  }
-  updateMarks2(obj){
-    return this.http.post('http://localhost:8080/user/updateMarks2',obj);
-  }
-  getEvents(){
-    return this.http.post('http://localhost:8080/user/getEvents',{});
-  }
-  getEvent(obj){
-    return this.http.post('http://localhost:8080/user/getEvent',obj);
-  }
-  getCount(obj){
-    return this.http.post('http://localhost:8080/user/getCount',obj);
-  }
-  validEmail(obj){
-    return this.http.post('http://localhost:8080/user/validEmail',obj);
-  }
-  getPass(obj){
-    return this.http.post('http://localhost:8080/user/getPass',obj);
-  }
-  getRegEvent(obj){
-    return this.http.post('http://localhost:8080/user/getRegEvent',obj);
-  }*/
-  
-
   //deploy
   getUsers(){
-    return this.http.post('/user/getUsers',{});
+    return this.http.post(this.mlink+'/user/getUsers',{});
   }
   getUser(obj){
-    return this.http.post('/user/getUser',obj);
+    return this.http.post(this.mlink+'/user/getUser',obj);
   }
   addUser(obj){
-    return this.http.post('/user/addUser',obj);
+    return this.http.post(this.mlink+'/user/addUser',obj);
   }
   scanUser1(obj){
-    return this.http.post('/user/scanUser1',obj);
+    return this.http.post(this.mlink+'/user/scanUser1',obj);
   }
   scanUser2(obj){
-    return this.http.post('/user/scanUser2',obj);
+    return this.http.post(this.mlink+'/user/scanUser2',obj);
   }
   updateMarks1(obj){
-    return this.http.post('/user/updateMarks1',obj);
+    return this.http.post(this.mlink+'/user/updateMarks1',obj);
   }
   updateMarks2(obj){
-    return this.http.post('/user/updateMarks2',obj);
+    return this.http.post(this.mlink+'/user/updateMarks2',obj);
   }
   getEvents(){
-    return this.http.post('/user/getEvents',{});
+    return this.http.post(this.mlink+'/user/getEvents',{});
   }
   getEvent(obj){
-    return this.http.post('/user/getEvent',obj);
+    return this.http.post(this.mlink+'/user/getEvent',obj);
   }
   getCount(obj){
-    return this.http.post('/user/getCount',obj);
+    return this.http.post(this.mlink+'/user/getCount',obj);
   }
   validEmail(obj){
-    return this.http.post('/user/validEmail',obj);
+    return this.http.post(this.mlink+'/user/validEmail',obj);
   }
   getPass(obj){
-    return this.http.post('/user/getPass',obj);
+    return this.http.post(this.mlink+'/user/getPass',obj);
   }
   getRegEvent(obj){
-    return this.http.post('/user/getRegEvent',obj);
+    return this.http.post(this.mlink+'/user/getRegEvent',obj);
+  }
+  razorpayOrder(){
+    return this.http.post(this.mlink+'/user/razorpayOrder',{});
   }
 }

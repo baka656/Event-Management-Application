@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { IttopService } from '../ittop.service';
-import{ FormGroup,Validators, FormBuilder} from '@angular/forms';
+import { FormGroup,Validators, FormBuilder} from '@angular/forms';
 import { User } from 'models/user';
 import { Router } from '@angular/router';
-declare var RazorpayCheckout:any;
+import { WindowRefService } from '../window-ref.service';
 
 @Component({
   selector: 'app-online-registration',
@@ -19,12 +19,10 @@ export class OnlineRegistrationPage implements OnInit {
   submitted = false;
   err:string="";
   userDetails:User={} as User;
-  paymentAmount:number=10;
   currency="INR";
   currencyIcon="₹";
-  //razor_key="HRrxX8Rhb3b3K3Wurle0UHkf";
-  razor_key="rzp_test_tKmGlTQpVe7iyL";
-  constructor(private us:IttopService,private alrt:AlertController,private fb:FormBuilder,private router:Router) { }
+  constructor(private us:IttopService,private alrt:AlertController,private fb:FormBuilder,
+    private router:Router,private winRef: WindowRefService) { }
 
   ngOnInit() {
     this.registrationForm = this.fb.group({
@@ -43,10 +41,6 @@ export class OnlineRegistrationPage implements OnInit {
     return this.registrationForm.controls; 
   }  
 
-  call(){
-    console.log(this.paymentAmount);
-  }
-
 
   createCode(){
     this.submitted = true;
@@ -57,7 +51,15 @@ export class OnlineRegistrationPage implements OnInit {
       console.log(data);
       if(data==true){
         this.userDetails.email=this.registrationForm.value.email;
-        this.paywithRazor();
+        this.us.razorpayOrder().subscribe(data=>{
+          console.log(data);
+          if(data['message']=='success'){
+            this.paywithRazor(data);
+          }
+          else{
+            alert('some error occured');
+          }
+        });
       }
       else{
         alert('enter valid email address');
@@ -65,8 +67,62 @@ export class OnlineRegistrationPage implements OnInit {
     })
   }   
 
+  paywithRazor(data){
+    this.userDetails.name=this.registrationForm.value.name;
+    this.userDetails.email=this.registrationForm.value.email;
+    this.userDetails.phone=this.registrationForm.value.phone;
+    this.userDetails.college=this.registrationForm.value.college;
+    this.userDetails.rollno=this.registrationForm.value.rollno;
+    var options = {
+      order_id: data['order']['id'],
+      description: 'Payment',
+      image: 'https://res.cloudinary.com/dmm4awbwm/image/upload/v1591517273/favicon_pbwxru.jpg', 
+      currency: this.currency, // your 3 letter currency code
+      key: data['key'], // your Key Id from Razorpay dashboard
+      amount: Number(data['amount']), // Payment amount in smallest denomiation e.g. cents for USD
+      name: 'Ecficio',
+      handler: function (response){
+        
+      },
+      prefill: {
+        email: this.registrationForm.value.email,
+        contact: this.registrationForm.value.phone,
+        name: this.registrationForm.value.name
+      },
+      theme: {
+        color: '#F0D551'
+      },
+      modal: {
+        ondismiss: function () {
+          alert('dismissed')
+        }
+      }
+    }; 
+    options.handler=((response)=>{
+      console.log(response);
+        this.userDetails.tid=response.razorpay_payment_id;
+        this.userDetails.paymentAmount=Number(data['amount']);
+        this.userDetails.paid=true;
+        this.userDetails.timestamp=new Date();
+        this.us.addUser(this.userDetails).subscribe((data)=>{
+          if(data['message']=='already exists'){
+            alert("email already registered");
+          }
+          else if(data['message']=='success'){
+            alert("receipt:"+data['receipt']);
+            this.router.navigate(['online-registration/',data['receipt']]);
+          }
+          else{
+            alert('some error occured');
+          }
+        });
+    });
 
-  paywithRazor(){
+    var rzpy=new this.winRef.nativeWindow.Razorpay(options);
+    rzpy.open();
+  }
+
+  /*paywithRazor(){
     this.userDetails.name=this.registrationForm.value.name;
     this.userDetails.email=this.registrationForm.value.email;
     this.userDetails.phone=this.registrationForm.value.phone;
@@ -121,5 +177,6 @@ export class OnlineRegistrationPage implements OnInit {
 
     RazorpayCheckout.open(options, successCallback, cancelCallback);
     
-  }
+  }*/
 }
+

@@ -8,36 +8,16 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-radio-group allow-empty-selection="true">
-      <ion-item>
-        <ion-label>Participant</ion-label>
-        <ion-radio slot="start" checked="1" (click)="baka(1)" color="secondary"></ion-radio>
-      </ion-item>
-      <ion-item>
-        <ion-label>Organizer</ion-label>
-        <ion-radio slot="start" (click)="baka(2)" color="danger"></ion-radio>
-      </ion-item>
-    </ion-radio-group>
-  </ion-list>
-  
-
-    <div *ngIf="!org">
-      <ion-item>
-        <ion-label position="floating">Receipt no:</ion-label>
-        <ion-input type="text" #r required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Mobile no:</ion-label>
-        <ion-input type="text" #phne required></ion-input>
-      </ion-item>
-      <ion-button size="small" expand="full" (click)="loginp(r.value,phne.value)">Login</ion-button>
-    </div>
-    <div *ngIf="org">
-      <ion-item>
-        <ion-label position="floating">Password:</ion-label>
-        <ion-input type="text" #pass required></ion-input>
-      </ion-item>
-      <ion-button size="small" expand="full" (click)="loginr(pass.value)">Login</ion-button>
-    </div>
+  <div>
+    <ion-item>
+      <ion-label position="floating">Are you a Participant.?</ion-label><br>
+      <ion-button size="small" expand="full" (click)="loginp()">Signin</ion-button>
+    </ion-item>
+  </div><br><hr><br>
+  <div>
+    <ion-item>
+      <ion-label position="floating">Are you an Organizer.?</ion-label><br>
+      <ion-button size="small" expand="full" (click)="loginr()">LogIn</ion-button>
+    </ion-item>
+  </div>
 </ion-content>

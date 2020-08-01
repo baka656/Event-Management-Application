@@ -17,6 +17,7 @@ npx cap sync
 ionic cordova plugin add phonegap-plugin-barcodescanner --save
 npm install @ionic-native/barcode-scanner --save
 npx cap sync
+npm i pdf-creator-node fs --save
 
 //pages and components//
 ionic g service ittop
